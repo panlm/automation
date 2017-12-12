@@ -1,0 +1,8 @@
+- name: mysql
+  hosts: mysql
+  vars:
+    resolv_nameservers:
+      - 202.96.209.133
+  roles:
+  - resolv
+  - mysql
