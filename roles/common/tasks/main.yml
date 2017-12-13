@@ -11,3 +11,10 @@
     name: '*'
     state: latest
 
+- name: install some packages
+  yum:
+    name:
+      - sysstat
+      - wget
+      - lbzip2
+    state: latest
