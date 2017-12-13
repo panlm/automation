@@ -3,12 +3,8 @@
   vars:
     resolv_nameservers:
       - 202.96.209.133
+    repo_name: epel.repo
   roles:
   - resolv
   - mysql
-  - role: yum-update
-    yum_update_conf_file: files/test.conf
-    yum_update_enablerepo:
-      - test
-    yum_update_update_cache: True
-
+  - common

@@ -1,0 +1,13 @@
+---
+- name: copy epel yum repo file
+  copy:
+    src: "{{ repo_name }}"
+    dest: "/etc/yum.repos.d/"
+    owner: root
+    mode: 0644
+
+- name: upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+

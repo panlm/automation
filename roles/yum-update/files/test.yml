@@ -1,4 +1,0 @@
-- name: copy test repo
-  copy:
-    src: test.repo
-    dest: /etc/yum.repos.d/test.repo
