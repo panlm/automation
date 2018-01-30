@@ -6,4 +6,7 @@
     repo_name: epel.repo
     keepalived_version: 1.3.9
   roles:
+  - resolv
+  - mysql
+  - common
   - soft-keepalived

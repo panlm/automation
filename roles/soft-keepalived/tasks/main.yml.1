@@ -1,0 +1,28 @@
+---
+- name: install C compiler
+  yum:
+    name: gcc, openssl-devel
+    state: latest
+
+- name: copy source code to target
+  copy:
+    src: keepalived-{{ keepalived_version }}.tar.gz
+    dest: "/tmp/"
+    owner: root
+    mode: 0644
+
+- name: untar keepalived
+  command: tar xf /tmp/keepalived-{{ keepalived_version }}.tar.gz -C /tmp/
+
+- name: run configure
+  command: cd /tmp/keepalived-{{ keepalived_version }} && ./configure
+
+- name: make
+  make:
+    chdir: /tmp/keepalived-{{ keepalived_version }}
+
+- name: make install
+  make:
+    chdir: /tmp/keepalived-{{ keepalived_version }}
+    target: install
+    
