@@ -1,9 +1,10 @@
 ---
 - name: install C compiler
   yum:
-    name: gcc, openssl-devel
+    name: gcc, openssl-devel, tar
     state: latest
 
+# install keepalived
 - name: delete directory
   file:
     path: "/tmp/keepalived-{{ keepalived_version }}"
@@ -27,6 +28,26 @@
 - name: make install in keepalived
   make:
     chdir: "/tmp/keepalived-{{ keepalived_version }}"
+    target: install
+  become: yes
+
+# redis
+- name: delete directory
+  file:
+    path: "/tmp/redis-{{ redis_version }}"
+    state: absent
+
+- name: copy to target and unarchive
+  unarchive: src="redis-{{ redis_version }}.tar.gz" dest=/tmp/
+
+- name: make all in redis
+  make:
+    chdir: "/tmp/redis-{{ redis_version }}"
+    target: all
+
+- name: make install in redis
+  make:
+    chdir: "/tmp/redis-{{ redis_version }}"
     target: install
   become: yes
 
