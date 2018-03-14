@@ -1,5 +1,5 @@
 [mysql]
-10.132.132.11
+10.21.25.66
 
 [mysql:vars]
 ansible_ssh_user=root
