@@ -18,4 +18,6 @@
     name:
       - sysstat
       - wget
+      - unzip
+      - bzip2
     state: latest
