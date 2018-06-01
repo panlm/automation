@@ -5,6 +5,8 @@
 #    dest: "/etc/yum.repos.d/"
 #    owner: root
 #    mode: 0644
+#
+#      - lbzip2
 
 - name: upgrade all packages
   yum:
@@ -16,5 +18,4 @@
     name:
       - sysstat
       - wget
-      - lbzip2
     state: latest
