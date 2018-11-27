@@ -12,3 +12,9 @@
       - unzip
       - git
     state: latest
+
+- name: disable firewalld
+  service:
+    name: firewalld
+    state: stopped
+    enabled: False
