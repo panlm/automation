@@ -1,15 +1,39 @@
 ---
 #getfile
 
-- name: get etcd
-  get_url:
-    url: https://github.com/coreos/etcd/releases/download/{{ ETCD_VERSION }}/etcd-{{ ETCD_VERSION }}-linux-amd64.tar.gz
-    dest: /tmp/etcd-{{ ETCD_VERSION }}-linux-amd64.tar.gz
+#- name: get etcd
+#  get_url:
+#    url: https://github.com/coreos/etcd/releases/download/{{ ETCD_VERSION }}/etcd-{{ ETCD_VERSION }}-linux-amd64.tar.gz
+#    dest: /tmp/etcd-{{ ETCD_VERSION }}-linux-amd64.tar.gz
+#    checksum: md5:f54ec062601df92591aac748eca664e2
 
-#- name: delete directory
-#  file:
-#    path: "/tmp/keepalived-{{ keepalived_version }}"
-#    state: absent
+- name: delete directory
+  file:
+    path: "/usr/bin/etcd"
+    state: absent
+  file:
+    path: "/usr/bin/etcdctl"
+    state: absent
 
-#- name: copy to target and unarchive
-#  unarchive: src="keepalived-{{ keepalived_version }}.tar.gz" dest=/tmp/
+- name: copy to target and unarchive
+  unarchive: src="/tmp/etcd-{{ ETCD_VERSION }}-linux-amd64.tar.gz" dest=/tmp/
+
+- name: copy to binary dir
+  copy:
+    src: /tmp/etcd-{{ ETCD_VERSION }}-linux-amd64/etcd
+    dest: /usr/bin/etcd
+    owner: root
+    group: root
+
+- name: copy to binary dir
+  copy:
+    src: /tmp/etcd-{{ ETCD_VERSION }}-linux-amd64/etcdctl
+    dest: /usr/bin/etcdctl
+    owner: root
+    group: root
+
+- name: delete install directory
+  file:
+    path: /tmp/etcd-{{ ETCD_VERSION }}-linux-amd64
+    state: absent
+
