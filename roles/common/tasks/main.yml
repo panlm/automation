@@ -3,5 +3,8 @@
 
 #- include: common.yml
 
-- name: run shell
-    shell: echo {{ETCD_ALL_CONTROLLERS}}
+- shell: echo {{ETCD_ALL_CONTROLLERS}}
+  register: output
+- name: variable is null
+  debug: msg='variable is null'
+  when: output.stdout == ""
