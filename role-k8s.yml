@@ -23,7 +23,8 @@
     ETCD_ALL_CONTROLLERS: ""
   roles:
     - role: epel-repository
-      role: common
+      when: ETCD_ALL_CONTROLLERS != ""
+    - role: common
       when: ETCD_ALL_CONTROLLERS != ""
 
 
