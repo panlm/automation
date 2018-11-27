@@ -20,15 +20,16 @@
   register: etcd_shell_output
 
 - set_fact:
-    ETCD_ALL_CONTROLLERS: "{{ etcd_shell_output.stdout_lines[0] }}"
-    ETCD_SERVERS: "{{ etcd_shell_output.stdout_lines[1] }}"
-    CONTROLLER_NAMES: "{{ etcd_shell_output.stdout_lines[2] }}"
+    ETCD_ALL_CONTROLLERS: "{{ etcd_shell_output.stdout_lines[3] }}"
+    ETCD_SERVERS: "{{ etcd_shell_output.stdout_lines[4] }}"
+    CONTROLLER_NAMES: "{{ etcd_shell_output.stdout_lines[5] }}"
 
 - debug:
-    var: 
-    - ETCD_ALL_CONTROLLERS
-    - ETCD_SERVERS
-    - CONTROLLER_NAMES
+    var: {{item}}
+    with_items:
+      - ETCD_ALL_CONTROLLERS
+      - ETCD_SERVERS
+      - CONTROLLER_NAMES
 
 - include: etcd.yml
 

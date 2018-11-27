@@ -25,4 +25,4 @@
     state: disabled
 
 - hostname:
-    name: {{NODE_NAME}}
+    name: "{{NODE_NAME}}"

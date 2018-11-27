@@ -2,16 +2,18 @@
 
 count=0
 for ip in $(echo "{{CONTROLLER_IPS}}" | tr "," "\n"); do
-  echo "${ip} controller${count}" | sudo -E tee -a /etc/hosts
-  CON+="controller${count}=https://${ip}:{{ETCD_CLIENT_PORT}}",
-  ETCD+="https://${ip}:{{ETCD_SERVER_PORT}}",
-  CONS_NAMES+="controller${count}",
-  count=$((count+1))
+    #here will print 3 lines i dont needed
+    echo "${ip} controller${count}" | sudo -E tee -a /etc/hosts
+    CON+="controller${count}=https://${ip}:{{ETCD_CLIENT_PORT}}",
+    ETCD+="https://${ip}:{{ETCD_SERVER_PORT}}",
+    CONS_NAMES+="controller${count}",
+    count=$((count+1))
 done
 ETCD_ALL_CONTROLLERS=$(echo $CON | sed  's/,$//')
 ETCD_SERVERS=$(echo $ETCD | sed  's/,$//')
 CONTROLLER_NAMES=$(echo $CONS_NAMES | sed  's/,$//')
 
+#here will print 3 lines i needed
 echo ${ETCD_ALL_CONTROLLERS}
 echo ${ETCD_SERVERS}
 echo ${CONTROLLER_NAMES}
