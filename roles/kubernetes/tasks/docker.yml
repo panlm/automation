@@ -4,10 +4,16 @@
     url: https://download.docker.com/linux/centos/docker-ce.repo
     dest: /etc/yum.repos.d/docker-ce.repo
 
+- name: Copy yum.conf to tmp dir
+  copy:
+    src: yum.conf
+    dest: /tmp/yum.conf
+
 - name: install docker-ce packages
   yum:
     name:
       - docker-ce-"{{DOCKER_VERSION}}"
       - docker-ce-selinux-"{{DOCKER_VERSION}}"
     state: present
+    conf_file: /tmp/yum.conf
 
