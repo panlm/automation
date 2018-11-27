@@ -1,9 +1,9 @@
 ---
-- name: upgrade all packages, excluding ansible
+- name: upgrade all packages, excluding ansible & docker-ce
   yum:
     name: '*'
     state: latest
-    exclude: ansible*
+    exclude: ansible*,docker-ce.*,docker-ce-selinux.*
 
 - name: install some packages
   yum:
