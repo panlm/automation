@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes #IMPORTANT
+  remote_user: root
+  vars:
+    KUBE_CLUSTER_NAME: kube-calm
+    KUBE_IMAGE_TAG: v1.10.5_coreos.0
+    DOCKER_VERSION: 17.03.2.ce
+    KUBE_CLUSTER_SUBNET: 10.200.0.0/16
+    KUBE_SERVICE_SUBNET: 10.32.0.0/24
+    KUBE_DNS_IP: 10.32.0.10
+    PE_CLUSTER_IP: 10.132.68.55
+    PE_DATA_SERVICE_IP: 10.132.68.56
+    PE_USERNAME: nutanix
+    PE_PASSWORD: nutanix/4u
+    PE_CONTAINER_NAME: SelfServiceContainer
+    INSTANCE_PUBLIC_KEY: "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEApFiiPDXZ/in4yknwl33rQkVi3Oo4X/78ekW93+gGptbV1wCj/PFay85/aMA98ZYaAxXoC+MHe3QgUuXER45poH552IWdF0tU7X/t0jH5KllVFx2yuFzCcjw1aKwdxKagDLX5jP4QvNsvB9pKx4dwECBp4qlKW4cpl/2cWEpUqRi67PVDYr3TMt/OCac6FaAMs5Du3N2HhGiWh2wezqUCRameLdni1/G3ovaKpGL+c68n0peBsK63AJEa+AjVfpFcz6kzEUUMGSvAWD2d5nKCkJzqfBgh6kFJUTXPX0YnorbGsp1SuxmLy1pD7RXh2it5IPFUAFgEQfBwJJd7L4UkWQ== root@centos"
+    ETCD_VERSION: "v3.2.24"
+  roles:
+    - common
+    - kubernetes

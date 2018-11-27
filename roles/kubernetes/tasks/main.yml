@@ -1,0 +1,15 @@
+---
+#getfile
+
+- name: get etcd
+  get_url:
+    url: https://github.com/coreos/etcd/releases/download/{{ ETCD_VERSION }}/etcd-{{ ETCD_VERSION }}-linux-amd64.tar.gz
+    dest: /tmp/etcd-{{ ETCD_VERSION }}-linux-amd64.tar.gz
+
+#- name: delete directory
+#  file:
+#    path: "/tmp/keepalived-{{ keepalived_version }}"
+#    state: absent
+
+#- name: copy to target and unarchive
+#  unarchive: src="keepalived-{{ keepalived_version }}.tar.gz" dest=/tmp/
