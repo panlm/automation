@@ -21,10 +21,9 @@
     ETCD_SERVER_PORT: 2379
     ETCD_CLIENT_PORT: 2380
     ETCD_ALL_CONTROLLERS: ""
-  tasks:
-    - shell: echo {{ETCD_ALL_CONTROLLERS}}
-      register: output
-    - roles:
-        - common
-#       - kubernetes
-      when: output.stdout == ""
+  roles:
+    - common
+#    - kubernetes
+  assert:
+    that:
+      - ETCD_ALL_CONTROLLERS != ""
