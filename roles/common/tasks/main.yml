@@ -20,5 +20,6 @@
     enabled: False
 
 - name: disable selinux
-  - selinux:
+  selinux:
     state: disabled
+    when: selinux.state != 'disabled'
