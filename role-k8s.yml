@@ -24,7 +24,7 @@
   tasks:
     - shell: echo {{ETCD_ALL_CONTROLLERS}}
       register: output
-  roles:
-    - common
-#    - kubernetes
-  when: output.stdout == ""
+    - roles:
+        - common
+#       - kubernetes
+      when: output.stdout == ""
