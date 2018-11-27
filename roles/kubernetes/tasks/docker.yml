@@ -1,0 +1,13 @@
+---
+- name: get docker-ce repo
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: install docker-ce packages
+  yum:
+    name:
+      - docker-ce-"{{DOCKER_VERSION}}"
+      - docker-ce-selinux-"{{DOCKER_VERSION}}"
+    state: present
+

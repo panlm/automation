@@ -4,7 +4,7 @@ Documentation=https://github.com/coreos
 
 [Service]
 ExecStart=/usr/bin/etcd \
-  --name {{inventory_hostname}} \
+  --name {{NODE_NAME}} \
   --cert-file={{ETCD_CERT_PATH}}/etcd-server.pem \
   --key-file={{ETCD_CERT_PATH}}/etcd-server-key.pem \
   --peer-cert-file={{ETCD_CERT_PATH}}/etcd-peer.pem \

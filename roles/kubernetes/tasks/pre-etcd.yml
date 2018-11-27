@@ -1,0 +1,25 @@
+---
+
+- name: Create etcd script
+  template:
+    src: etcd.script.j2
+    dest: /tmp/etcd.script
+    owner: root
+    group: root
+    mode: 0755
+
+- shell: /tmp/etcd.script
+  register: etcd_shell_output
+
+- set_fact:
+    ETCD_ALL_CONTROLLERS: "{{ etcd_shell_output.stdout_lines[3] }}"
+    ETCD_SERVERS: "{{ etcd_shell_output.stdout_lines[4] }}"
+    CONTROLLER_NAMES: "{{ etcd_shell_output.stdout_lines[5] }}"
+
+- debug:
+    var: ETCD_ALL_CONTROLLERS
+- debug:
+    var: ETCD_SERVERS
+- debug:
+    var: CONTROLLER_NAMES
+

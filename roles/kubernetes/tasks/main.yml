@@ -6,33 +6,13 @@
     name:
       - iscsi-initiator-utils
       - socat
+      - yum-utils
     state: latest
 
-- name: Create etcd script
-  template:
-    src: etcd.script.j2
-    dest: /tmp/etcd.script
-    owner: root
-    group: root
-    mode: 0755
+#- include: pre-etcd.yml
+#- include: etcd.yml
 
-- shell: /tmp/etcd.script
-  register: etcd_shell_output
-
-- set_fact:
-    ETCD_ALL_CONTROLLERS: "{{ etcd_shell_output.stdout_lines[3] }}"
-    ETCD_SERVERS: "{{ etcd_shell_output.stdout_lines[4] }}"
-    CONTROLLER_NAMES: "{{ etcd_shell_output.stdout_lines[5] }}"
-
-- debug:
-    var: {{item}}
-    with_items:
-      - ETCD_ALL_CONTROLLERS
-      - ETCD_SERVERS
-      - CONTROLLER_NAMES
-
-- include: etcd.yml
-
+- include: docker.yml
 
 
 

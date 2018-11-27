@@ -4,9 +4,9 @@
 # --extra-vars "ETCD_ALL_CONTROLLERS=xxx NODE_NAME=xxx"
 
 - hosts: all
-  become: no
+  become: yes
   gather_facts: yes #IMPORTANT
-  remote_user: stevenpan
+  remote_user: root
   vars:
     NODE_NAME: ""
     KUBE_CLUSTER_NAME: kube-calm
@@ -32,5 +32,5 @@
 #      when: ETCD_ALL_CONTROLLERS != "" and NODE_NAME != ""
     - role: common
       when: NODE_NAME != ""
-#    - role: kubernetes
-#      when: ETCD_ALL_CONTROLLERS != "" and NODE_NAME != ""
+    - role: kubernetes
+      when: NODE_NAME != ""
