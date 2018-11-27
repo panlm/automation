@@ -7,26 +7,39 @@
 #    dest: /tmp/etcd-{{ ETCD_VERSION }}-linux-amd64.tar.gz
 #    checksum: md5:f54ec062601df92591aac748eca664e2
 
+- vars:
+    ETCD_VERSION: 111
+
 - name: copy to target and unarchive
   unarchive: 
     src: "/tmp/etcd-{{ ETCD_VERSION }}-linux-amd64.tar.gz" 
     dest: /tmp/
 
-- name: copy to binary dir
+- name: Copy to binary dir
   copy:
     src: /tmp/etcd-{{ ETCD_VERSION }}-linux-amd64/{{item}}
     dest: /usr/bin/{{item}}
     owner: root
     group: root
+    mode: 0755
   with_item:
     - etcd
     - etcdctl
 
-- name: delete install directory
+- name: Delete install directory
   file:
     path: /tmp/etcd-{{ ETCD_VERSION }}-linux-amd64
     state: absent
 
+- name: Create systemd unit file
+  template:
+    src: etcd.service.j2
+    dest: /etc/systemd/system/etcd.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload systemd
 
 
 

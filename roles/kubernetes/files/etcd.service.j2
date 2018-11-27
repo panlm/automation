@@ -1,0 +1,30 @@
+[Unit]
+Description=etcd
+Documentation=https://github.com/coreos
+
+[Service]
+ExecStart=/usr/bin/etcd \\
+  --name ${NODE_NAME} \\
+  --cert-file=${ETCD_CERT_PATH}/etcd-server.pem \\
+  --key-file=${ETCD_CERT_PATH}/etcd-server-key.pem \\
+  --peer-cert-file=${ETCD_CERT_PATH}/etcd-peer.pem \\
+  --peer-key-file=${ETCD_CERT_PATH}/etcd-peer-key.pem \\
+  --trusted-ca-file=${ETCD_CERT_PATH}/etcd-ca.pem \\
+  --peer-trusted-ca-file=${ETCD_CERT_PATH}/etcd-ca.pem \\
+  --peer-client-cert-auth \\
+  --client-cert-auth \\
+  --initial-advertise-peer-urls https://${INTERNAL_IP}:${ETCD_CLIENT_PORT} \\
+  --listen-peer-urls https://${INTERNAL_IP}:${ETCD_CLIENT_PORT} \\
+  --listen-client-urls https://${INTERNAL_IP}:${ETCD_SERVER_PORT},http://127.0.0.1:${ETCD_SERVER_PORT} \\
+  --advertise-client-urls https://${INTERNAL_IP}:${ETCD_SERVER_PORT} \\
+  --initial-cluster-token etcd-cluster-0 \\
+  --initial-cluster ${ETCD_ALL_CONTROLLERS} \\
+  --initial-cluster-state new \\
+  --data-dir=/var/lib/etcd \\
+  --wal-dir=/var/lib/etcd/wal \\
+  --max-wals=0
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
