@@ -19,7 +19,7 @@
     owner: root
     group: root
     mode: 0755
-  with_item:
+  with_items:
     - etcd
     - etcdctl
 

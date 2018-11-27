@@ -1,0 +1,25 @@
+---
+- name: upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+
+- name: install some packages
+  yum:
+    name:
+      - sysstat
+      - wget
+      - unzip
+      - git
+    state: latest
+
+- name: be sure firewalld is disabled
+  systemd: name=firewalld enabled=no
+
+- name: be sure firewalld is stopped
+  systemd: name=firewalld state=stopped
+  ignore_errors: yes
+
+- name: disable selinux
+  selinux:
+    state: disabled

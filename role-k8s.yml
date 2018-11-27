@@ -23,6 +23,4 @@
     ETCD_ALL_CONTROLLERS: ""
   roles:
     - common
-    - kubernetes
-  when:
-    {{ETCD_ALL_CONTROLLERS}} != ""
+#    - kubernetes
