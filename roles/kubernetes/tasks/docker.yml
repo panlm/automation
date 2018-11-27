@@ -23,7 +23,7 @@
 - name: copy docker-service.script to /tmp
   copy:
     src: docker-service.script
-    desc: /tmp/docker-service.script
+    dest: /tmp/docker-service.script
     owner: root
     group: root
     mode: 0755
@@ -41,7 +41,7 @@
 - name: copy daemon.json to /etc/docker/
   copy:
     src: daemon.json
-    desc: /etc/docker/daemon.json
+    dest: /etc/docker/daemon.json
     owner: root
     group: root
     mode: 0644
