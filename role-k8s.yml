@@ -26,6 +26,5 @@
       when: ETCD_ALL_CONTROLLERS != ""
     - role: common
       when: ETCD_ALL_CONTROLLERS != ""
-
-
-#    - kubernetes
+    - role: kubernetes
+      when: ETCD_ALL_CONTROLLERS != ""
