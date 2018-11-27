@@ -22,8 +22,9 @@
     ETCD_CLIENT_PORT: 2380
     ETCD_ALL_CONTROLLERS: ""
   roles:
-    - common
+    - role: epel-repository
+      role: common
+      when: ETCD_ALL_CONTROLLERS != ""
+
+
 #    - kubernetes
-  assert:
-    that:
-      - ETCD_ALL_CONTROLLERS != ""
