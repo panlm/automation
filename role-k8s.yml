@@ -28,8 +28,8 @@
     ETCD_ALL_CONTROLLERS: ""
     CONTROLLER_IPS: "1.1.1.1,1.1.1.2,1.1.1.3"
   roles:
-#    - role: epel-repository
-#      when: ETCD_ALL_CONTROLLERS != "" and NODE_NAME != ""
+    - role: epel-repository
+      when: NODE_NAME != ""
     - role: common
       when: NODE_NAME != ""
     - role: kubernetes

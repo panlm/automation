@@ -1,9 +1,16 @@
 ---
+- name: remove docker-ce temporary
+  yum:
+    name: 
+      - docker-ce.*
+      - docker-ce-selinux.*
+    state: absent
+
 - name: upgrade all packages, excluding ansible & docker-ce
   yum:
     name: '*'
     state: latest
-    exclude: ansible*,docker-ce.*,docker-ce-selinux.*
+#    exclude: ansible*,docker-ce.*,docker-ce-selinux.*
 
 - name: install some packages
   yum:
