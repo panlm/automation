@@ -1,8 +1,9 @@
 ---
-- name: upgrade all packages
+- name: upgrade all packages, excluding ansible
   yum:
     name: '*'
     state: latest
+    exclude: ansible*
 
 - name: install some packages
   yum:
@@ -11,7 +12,7 @@
       - wget
       - unzip
       - git
-    state: latest
+    state: present
 
 - name: be sure firewalld is disabled
   systemd: name=firewalld enabled=no

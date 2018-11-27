@@ -4,10 +4,13 @@
     url: https://download.docker.com/linux/centos/docker-ce.repo
     dest: /etc/yum.repos.d/docker-ce.repo
 
-- name: Copy yum.conf to tmp dir
+- name: copy yum.conf to tmp dir
   copy:
     src: yum.conf
     dest: /tmp/yum.conf
+    owner: root
+    group: root
+    mode: 0644
 
 - name: install docker-ce packages
   yum:
@@ -16,4 +19,30 @@
       - docker-ce-selinux-{{DOCKER_VERSION}}
     state: present
     conf_file: /tmp/yum.conf
+
+- name: copy docker-service.script to /tmp
+  copy:
+    src: docker-service.script
+    desc: /tmp/docker-service.script
+    owner: root
+    group: root
+    mode: 0755
+
+- name: modify docker.service
+  shell: /tmp/docker-service.script
+
+- name: be sure docker is enabled
+  systemd: name=docker enabled=yes
+
+- name: be sure docker is stopped
+  systemd: name=docker state=stopped
+  ignore_errors: yes
+
+- name: copy daemon.json to /etc/docker/
+  copy:
+    src: daemon.json
+    desc: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: 0755
 
