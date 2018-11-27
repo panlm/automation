@@ -5,7 +5,6 @@
     KUBE_CERT_PATH: "/etc/kubernetes/ssl"
     KUBE_MANIFEST_PATH: "/etc/kubernetes/manifests"
 
-
 #- debug:
 #    var: KUBE_CLUSTER_DNS
 

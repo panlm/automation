@@ -23,10 +23,11 @@
     group: root
     mode: 0644
 
-- name: get cni plugin
-  get_url:
-    url: https://github.com/containernetworking/plugins/releases/download/v0.6.0/cni-plugins-amd64-v0.6.0.tgz
-    dest: /tmp/cni-plugins-amd64-v0.6.0.tgz
+#- name: get cni plugin
+#  get_url:
+#    url: https://github.com/containernetworking/plugins/releases/download/v0.6.0/cni-plugins-amd64-v0.6.0.tgz
+#    dest: /tmp/cni-plugins-amd64-v0.6.0.tgz
+#    checksum: md5:9534876fae7dbe813cdab404dc1f9219
 
 - name: copy to target and unarchive
   unarchive: 

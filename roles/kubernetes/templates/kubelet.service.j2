@@ -15,11 +15,11 @@ ExecStart=/usr/bin/kubelet \
   --enable-custom-metrics \
   --kubeconfig={{KUBE_CERT_PATH}}/{{NODE_NAME}}.kubeconfig \
   --network-plugin=cni \
-  --pod-cidr=${CLUSTER_SUBNET} \
+  --pod-cidr={{CLUSTER_SUBNET}} \
   --register-node=true \
   --runtime-request-timeout=10m \
   --client-ca-file={{KUBE_CERT_PATH}}/ca.pem \
-  --tls-cert-file={{KUBE_CERT_PATH}}/${NODE_NAME}.pem \
+  --tls-cert-file={{KUBE_CERT_PATH}}/{{NODE_NAME}}.pem \
   --tls-private-key-file={{KUBE_CERT_PATH}}/{{NODE_NAME}}-key.pem \
   --pod-manifest-path={{KUBE_MANIFEST_PATH}} \
   --read-only-port=0 \
