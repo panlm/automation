@@ -1,21 +1,14 @@
 ---
-#- name: copy epel yum repo file
-#  copy:
-#    src: "{{ repo_name }}"
-#    dest: "/etc/yum.repos.d/"
-#    owner: root
-#    mode: 0644
-#
-#      - lbzip2
-
-#- name: upgrade all packages
-#  yum:
-#    name: '*'
-#    state: latest
+- name: upgrade all packages
+  yum:
+    name: '*'
+    state: latest
 
 - name: install some packages
   yum:
     name:
       - sysstat
       - wget
+      - unzip
+      - git
     state: latest
