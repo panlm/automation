@@ -12,8 +12,8 @@
 - name: install docker-ce packages
   yum:
     name:
-      - docker-ce-"{{DOCKER_VERSION}}"
-      - docker-ce-selinux-"{{DOCKER_VERSION}}"
+      - docker-ce-{{DOCKER_VERSION}}
+      - docker-ce-selinux-{{DOCKER_VERSION}}
     state: present
     conf_file: /tmp/yum.conf
 
