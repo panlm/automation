@@ -18,3 +18,7 @@
     name: firewalld
     state: stopped
     enabled: False
+
+- name: disable selinux
+  - selinux:
+    state: disabled
