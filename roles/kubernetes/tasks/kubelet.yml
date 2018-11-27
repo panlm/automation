@@ -1,0 +1,20 @@
+---
+- set_fact:
+    KUBE_CLUSTER_DNS: "{{ KUBE_DNS_IP }}"
+    CLUSTER_SUBNET: "{{ KUBE_CLUSTER_SUBNET }}"
+    KUBE_CERT_PATH: "/etc/kubernetes/ssl"
+    KUBE_MANIFEST_PATH: "/etc/kubernetes/manifests"
+
+
+#- debug:
+#    var: KUBE_CLUSTER_DNS
+
+- name: Create systemd unit file
+  template:
+    src: kubelet.service.j2
+    dest: /etc/systemd/system/kubelet.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload systemd
