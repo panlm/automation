@@ -11,12 +11,12 @@
 - name: Create etcd script
   template:
     src: etcd.script.j2
-    dest: /etc/systemd/system/etcd.service
+    dest: /tmp/etcd.script
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
 
-- shell:
+- shell: /tmp/etcd.script
   register: etcd_shell_output
 
 - set_fact:
