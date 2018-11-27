@@ -1,6 +1,35 @@
 ---
 # main
 
+- name: install some packages
+  yum:
+    name:
+      - iscsi-initiator-utils
+      - socat
+    state: latest
+
+- name: Create etcd script
+  template:
+    src: etcd.script.j2
+    dest: /etc/systemd/system/etcd.service
+    owner: root
+    group: root
+    mode: 0644
+
+- shell:
+  register: etcd_shell_output
+
+- set_fact:
+    ETCD_ALL_CONTROLLERS: "{{ etcd_shell_output.stdout_lines[0] }}"
+    ETCD_SERVERS: "{{ etcd_shell_output.stdout_lines[1] }}"
+    CONTROLLER_NAMES: "{{ etcd_shell_output.stdout_lines[2] }}"
+
+- debug:
+    var: 
+    - ETCD_ALL_CONTROLLERS
+    - ETCD_SERVERS
+    - CONTROLLER_NAMES
+
 - include: etcd.yml
 
 

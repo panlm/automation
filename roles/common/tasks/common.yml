@@ -23,3 +23,6 @@
 - name: disable selinux
   selinux:
     state: disabled
+
+- hostname:
+    name: {{NODE_NAME}}
