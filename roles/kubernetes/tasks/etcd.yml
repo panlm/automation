@@ -7,9 +7,6 @@
 #    dest: /tmp/etcd-{{ ETCD_VERSION }}-linux-amd64.tar.gz
 #    checksum: md5:f54ec062601df92591aac748eca664e2
 
-- vars:
-    ETCD_VERSION: 111
-
 - name: copy to target and unarchive
   unarchive: 
     src: "/tmp/etcd-{{ ETCD_VERSION }}-linux-amd64.tar.gz" 

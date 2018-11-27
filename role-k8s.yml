@@ -16,7 +16,13 @@
     PE_PASSWORD: nutanix/4u
     PE_CONTAINER_NAME: SelfServiceContainer
     INSTANCE_PUBLIC_KEY: "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEApFiiPDXZ/in4yknwl33rQkVi3Oo4X/78ekW93+gGptbV1wCj/PFay85/aMA98ZYaAxXoC+MHe3QgUuXER45poH552IWdF0tU7X/t0jH5KllVFx2yuFzCcjw1aKwdxKagDLX5jP4QvNsvB9pKx4dwECBp4qlKW4cpl/2cWEpUqRi67PVDYr3TMt/OCac6FaAMs5Du3N2HhGiWh2wezqUCRameLdni1/G3ovaKpGL+c68n0peBsK63AJEa+AjVfpFcz6kzEUUMGSvAWD2d5nKCkJzqfBgh6kFJUTXPX0YnorbGsp1SuxmLy1pD7RXh2it5IPFUAFgEQfBwJJd7L4UkWQ== root@centos"
-#    ETCD_VERSION: "v3.2.24"
+    ETCD_VERSION: "v3.2.24" #<<<
+    ETCD_CERT_PATH: ""
+    ETCD_SERVER_PORT: 2379
+    ETCD_CLIENT_PORT: 2380
+    ETCD_ALL_CONTROLLERS: ""
   roles:
     - common
     - kubernetes
+  when:
+    {{ETCD_ALL_CONTROLLERS}} != ""
