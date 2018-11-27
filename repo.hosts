@@ -1,4 +1,2 @@
 [dbservers]
-db01
-db02
-db03
+localhost
