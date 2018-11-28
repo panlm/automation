@@ -17,11 +17,18 @@
 
 - name: copy 10-flannel.conf to cni conf dir
   copy:
-    src: 10-flannel.conf
     dest: "{{KUBE_CNI_CONF_PATH}}/10-flannel.conf"
     owner: root
     group: root
     mode: 0644
+    content: |
+        {
+            "name": "cbr0",
+            "type": "flannel",
+            "delegate": {
+                "isDefaultGateway": true
+            }
+        }
 
 #- name: get cni plugin
 #  get_url:
