@@ -5,8 +5,13 @@
     KUBE_CERT_PATH: "/etc/kubernetes/ssl"
     KUBE_MANIFEST_PATH: "/etc/kubernetes/manifests"
 
-#- debug:
-#    var: KUBE_CLUSTER_DNS
+- name: Ensures dir exists
+  file: 
+    path: "{{item}}"
+    state: directory
+    with_items:
+      - "{{KUBE_CERT_PATH}}"
+      - "{{KUBE_MANIFEST_PATH}}"
 
 - name: Create systemd unit file
   template:

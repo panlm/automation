@@ -22,13 +22,15 @@
 
 - name: check exclude existed in yum.conf
   shell: egrep -q '^exclude=' /etc/yum.conf
-  register: check-yum-result
+  register: checkyumresult
   check_mode: no
   ignore_errors: yes
   changed_when: no
+- debug:
+    var: checkyumresult.rc
 - name: exclude docker from yum.conf
   shell: echo 'exclude=docker*' >> /etc/yum.conf
-  when: check-yum-result.rc == 1
+  when: checkyumresult.rc == 1
 
 - name: copy docker-service.script to /tmp
   copy:
