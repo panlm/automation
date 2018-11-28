@@ -1,0 +1,12 @@
+---
+# set iscsi name for work node
+
+- name: set iscsi name
+  copy:
+    dest: /etc/iscsi/initiatorname.iscsi
+    owner: root
+    group: root
+    mode: 0644
+    content: |
+      InitiatorName=iqn.1994-05.com.nutanix:k8s-worker
+

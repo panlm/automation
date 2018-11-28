@@ -3,17 +3,14 @@
     KUBE_CNI_BIN_PATH: "/opt/cni/bin"
     KUBE_CNI_CONF_PATH: "/etc/cni/net.d"
 
-- name: create cni bin dir
+- name: create cni bin/conf dir
   file: 
-    path: "{{KUBE_CNI_BIN_PATH}}"
+    path: "{{item}}"
     recurse: yes
     state: directory
-
-- name: create cni conf dir
-  file: 
-    path: "{{KUBE_CNI_CONF_PATH}}"
-    recurse: yes
-    state: directory
+  with_items:
+    - "{{KUBE_CNI_BIN_PATH}}"
+    - "{{KUBE_CNI_CONF_PATH}}"
 
 - name: copy 10-flannel.conf to cni conf dir
   copy:

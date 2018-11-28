@@ -8,6 +8,14 @@
     ETCD_CLIENT_PORT: 2380
     ETCD_ALL_CONTROLLERS: ""
 
+- name: Ensures dir exists
+  file: 
+    path: "{{item}}"
+    state: directory
+    recurse: yes
+  with_items:
+    - "{{ETCD_CERT_PATH}}"
+
 - name: Create etcd script
   template:
     src: etcd.script.j2

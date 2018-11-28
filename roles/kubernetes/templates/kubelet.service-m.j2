@@ -1,0 +1,41 @@
+[Unit]
+Description=Kubernetes Kubelet
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/bin/kubelet \
+  --allow-privileged=true \
+  --anonymous-auth=false \
+  --authorization-mode=Webhook \
+  --cluster-dns={{KUBE_DNS_IP}} \
+  --cluster-domain=cluster.local \
+  --container-runtime=docker \
+  --enable-custom-metrics \
+  --kubeconfig={{KUBE_CERT_PATH}}/{{NODE_NAME}}.kubeconfig \
+  --network-plugin=cni \
+  --pod-cidr={{KUBE_CLUSTER_SUBNET}} \
+  --register-node=true \
+  --runtime-request-timeout=10m \
+  --client-ca-file={{KUBE_CERT_PATH}}/ca.pem \
+  --tls-cert-file={{KUBE_CERT_PATH}}/{{NODE_NAME}}.pem \
+  --tls-private-key-file={{KUBE_CERT_PATH}}/{{NODE_NAME}}-key.pem \
+  --pod-manifest-path={{KUBE_MANIFEST_PATH}} \
+  --read-only-port=0 \
+  --protect-kernel-defaults=false \
+  --make-iptables-util-chains=true \
+  --keep-terminated-pod-volumes=false \
+  --event-qps=0 \
+  --cadvisor-port=0 \
+  --runtime-cgroups=/systemd/system.slice \
+  --kubelet-cgroups=/systemd/system.slice \
+  --eviction-hard=memory.available<100Mi,nodefs.available<10%,nodefs.inodesFree<5% \
+  --node-labels 'node-role.kubernetes.io/worker=true' \
+  --node-labels 'beta.kubernetes.io/fluentd-ds-ready=true' \
+  --v=2
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

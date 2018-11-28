@@ -9,13 +9,13 @@ ExecStart=/usr/bin/kubelet \
   --allow-privileged=true \
   --anonymous-auth=false \
   --authorization-mode=Webhook \
-  --cluster-dns={{KUBE_CLUSTER_DNS}} \
+  --cluster-dns={{KUBE_DNS_IP}} \
   --cluster-domain=cluster.local \
   --container-runtime=docker \
   --enable-custom-metrics \
   --kubeconfig={{KUBE_CERT_PATH}}/{{NODE_NAME}}.kubeconfig \
   --network-plugin=cni \
-  --pod-cidr={{CLUSTER_SUBNET}} \
+  --pod-cidr={{KUBE_CLUSTER_SUBNET}} \
   --register-node=true \
   --runtime-request-timeout=10m \
   --client-ca-file={{KUBE_CERT_PATH}}/ca.pem \

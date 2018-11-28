@@ -9,14 +9,18 @@
       - yum-utils
     state: latest
 
+## for k8s controller node
 #- include: etcd.yml
 #- include: docker.yml
 #- include: cni.yml
-- include: kubelet.yml
+#- include: kubelet-c.yml
 #- include: helm.yml
 #- include: kubectl.yml
 #- include: cfssl.yml
 
-
-
+## for k8s work node
+- include: docker.yml
+- include: cni.yml
+- include: kubelet-m.yml
+- include: kube-proxy.xml
 

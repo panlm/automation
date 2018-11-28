@@ -1,0 +1,29 @@
+---
+# install kubeproxy
+
+- set_fact:
+    KUBE_CLUSTER_DNS: "{{ KUBE_DNS_IP }}"
+    CLUSTER_SUBNET: "{{ KUBE_CLUSTER_SUBNET }}"
+    KUBE_CERT_PATH: "/etc/kubernetes/ssl"
+    KUBE_MANIFEST_PATH: "/etc/kubernetes/manifests"
+
+- name: Ensures dir exists
+  file: 
+    path: "{{item}}"
+    state: directory
+    recurse: yes
+  with_items:
+    - "{{KUBE_CERT_PATH}}"
+    - "{{KUBE_MANIFEST_PATH}}"
+    - /opt/kube-ssl
+
+- name: Create kube-proxy yml file
+  template:
+    src: kube-proxy.yaml.j2
+    dest: "{{KUBE_MANIFEST_PATH}}/kube-proxy.yaml"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload systemd
+
