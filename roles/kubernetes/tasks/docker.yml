@@ -20,6 +20,9 @@
     state: present
     conf_file: /tmp/yum.conf
 
+- name: exclude docker from yum.conf
+  shell: echo 'exclude=docker*' >> /etc/yum.conf
+
 - name: copy docker-service.script to /tmp
   copy:
     src: docker-service.script
