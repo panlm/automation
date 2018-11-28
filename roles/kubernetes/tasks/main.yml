@@ -9,10 +9,10 @@
       - yum-utils
     state: latest
 
-#- include: pre-etcd.yml
 #- include: etcd.yml
 #- include: docker.yml
+#- include: cni.yml
+#- include: kubelet.yml
 
-- include: cni.yml
-- include: kubelet.yml
-
+- include: helm.yml
+- include: kubectl.yml

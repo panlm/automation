@@ -1,6 +1,36 @@
 ---
 # install etcd
 
+- set_fact:
+    ETCD_VERSION: "v3.2.24"
+    ETCD_CERT_PATH: "/etc/ssl/certs/etcd"
+    ETCD_SERVER_PORT: 2379
+    ETCD_CLIENT_PORT: 2380
+    ETCD_ALL_CONTROLLERS: ""
+
+- name: Create etcd script
+  template:
+    src: etcd.script.j2
+    dest: /tmp/etcd.script
+    owner: root
+    group: root
+    mode: 0755
+
+- shell: /tmp/etcd.script
+  register: etcd_shell_output
+
+- set_fact:
+    ETCD_ALL_CONTROLLERS: "{{ etcd_shell_output.stdout_lines[3] }}"
+    ETCD_SERVERS: "{{ etcd_shell_output.stdout_lines[4] }}"
+    CONTROLLER_NAMES: "{{ etcd_shell_output.stdout_lines[5] }}"
+
+- debug:
+    var: ETCD_ALL_CONTROLLERS
+- debug:
+    var: ETCD_SERVERS
+- debug:
+    var: CONTROLLER_NAMES
+
 #- name: get etcd
 #  get_url:
 #    url: https://github.com/coreos/etcd/releases/download/{{ ETCD_VERSION }}/etcd-{{ ETCD_VERSION }}-linux-amd64.tar.gz

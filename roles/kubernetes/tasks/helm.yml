@@ -1,0 +1,34 @@
+---
+# install helm
+
+- set_fact:
+    HELM_VERSION: "v2.8.2"
+    HELM_FILENAME: "helm-{{HELM_VERSION}}-linux-amd64.tar.gz"
+
+
+- name: get helm
+  get_url:
+    url: "https://storage.googleapis.com/kubernetes-helm/{{HELM_FILENAME}}"
+    dest: /tmp/{{HELM_FILENAME}}
+#    checksum: md5:9534876fae7dbe813cdab404dc1f9219
+
+- name: copy to target and unarchive
+  unarchive: 
+    src: /tmp/{{HELM_FILENAME}}
+    dest: /tmp
+
+- name: copy helm to bin dir
+  copy:
+    src: /tmp/linux-amd64/helm
+    dest: /usr/local/bin/helm
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Delete install file
+  file:
+    path: /tmp/linux-amd64
+    state: absent
+  file:
+    path: /tmp/{{HELM_FILENAME}}
+    state: absent
