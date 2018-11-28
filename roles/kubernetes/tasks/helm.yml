@@ -5,7 +5,6 @@
     HELM_VERSION: "v2.8.2"
     HELM_FILENAME: "helm-{{HELM_VERSION}}-linux-amd64.tar.gz"
 
-
 - name: get helm
   get_url:
     url: "https://storage.googleapis.com/kubernetes-helm/{{HELM_FILENAME}}"
@@ -29,6 +28,8 @@
   file:
     path: /tmp/linux-amd64
     state: absent
+
+- name: Delete install file
   file:
     path: /tmp/{{HELM_FILENAME}}
     state: absent

@@ -5,8 +5,7 @@
     VERION1: "{{ KUBE_IMAGE_TAG | regex_replace('_', ' ') }}"
     VERION: "{{ VERION | regex_replace('^([^ ]+) .*$', '\\1') }}"
 - debug:
-    var:
-    - VERION
+    var: VERION
 
 - name: get kubectl
   get_url:
