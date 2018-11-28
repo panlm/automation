@@ -41,7 +41,3 @@
     src: /tmp/cni-plugins-amd64-v0.6.0.tgz
     dest: "{{KUBE_CNI_BIN_PATH}}"
 
-- name: Delete install file
-  file:
-    path: /tmp/cni-plugins-amd64-v0.6.0.tgz
-    state: absent
