@@ -5,11 +5,11 @@
     HELM_VERSION: "v2.8.2"
     HELM_FILENAME: "helm-{{HELM_VERSION}}-linux-amd64.tar.gz"
 
-- name: get helm
-  get_url:
-    url: "https://storage.googleapis.com/kubernetes-helm/{{HELM_FILENAME}}"
-    dest: /tmp/{{HELM_FILENAME}}
-#    checksum: md5:9534876fae7dbe813cdab404dc1f9219
+#- name: get helm
+#  get_url:
+#    url: "https://storage.googleapis.com/kubernetes-helm/{{HELM_FILENAME}}"
+#    dest: /tmp/{{HELM_FILENAME}}
+#    checksum: md5:5fc08ba59c95c2ec14b152dfefe78660
 
 - name: copy to target and unarchive
   unarchive: 
@@ -29,7 +29,3 @@
     path: /tmp/linux-amd64
     state: absent
 
-- name: Delete install file
-  file:
-    path: /tmp/{{HELM_FILENAME}}
-    state: absent
