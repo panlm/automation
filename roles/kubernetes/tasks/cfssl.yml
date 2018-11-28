@@ -1,0 +1,33 @@
+---
+# install cfssl
+
+#- name: get cfssl
+#  get_url:
+#    url: "https://pkg.cfssl.org/R1.2/cfssl_linux-amd64"
+#    dest: /tmp/cfssl_linux-amd64
+#    checksum: md5:fe9b6650bf148a8f827ae7496e5ce87f
+
+#- name: get cfssljson
+#  get_url:
+#    url: "https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64"
+#    dest: /tmp/cfssljson_linux-amd64
+#    checksum: md5:a25cf1f6f41b7b6ebf8bf8e5cc851bf3
+
+- name: copy cfssl to bin dir
+  copy:
+    src: /tmp/cfssl_linux-amd64
+    dest: /usr/local/bin/cfssl
+    owner: root
+    group: root
+    mode: 0755
+
+- name: copy cfssljson to bin dir
+  copy:
+    src: /tmp/cfssljson_linux-amd64
+    dest: /usr/local/bin/cfssljson
+    owner: root
+    group: root
+    mode: 0755
+
+
+

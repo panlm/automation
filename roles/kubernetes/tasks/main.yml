@@ -16,3 +16,6 @@
 
 - include: helm.yml
 - include: kubectl.yml
+- include: cfssl.yml
+
+

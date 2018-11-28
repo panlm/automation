@@ -1,5 +1,5 @@
 ---
-# install helm
+# install kubectl
 
 - set_fact:
     VERSION1: "{{ KUBE_IMAGE_TAG | regex_replace('_', ' ') }}"
@@ -12,7 +12,7 @@
 #  get_url:
 #    url: "https://storage.googleapis.com/kubernetes-release/release/{{VERSION}}/bin/linux/amd64/kubectl"
 #    dest: /tmp/kubectl
-#    checksum: md5:9534876fae7dbe813cdab404dc1f9219
+#    checksum: md5:58d415fa7054e66f6814afdbde20bd89
 
 - name: copy kubectl to bin dir
   copy:
