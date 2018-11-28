@@ -2,15 +2,16 @@
 # install helm
 
 - set_fact:
-    VERION1: "{{ KUBE_IMAGE_TAG | regex_replace('_', ' ') }}"
-    VERION: "{{ VERION | regex_replace('^([^ ]+) .*$', '\\1') }}"
+    VERSION1: "{{ KUBE_IMAGE_TAG | regex_replace('_', ' ') }}"
+- set_fact:
+    VERSION: "{{ VERSION1 | regex_replace('^([^ ]+) .*$', '\\1') }}"
 - debug:
-    var: VERION
+    var: VERSION
 
-- name: get kubectl
-  get_url:
-    url: "https://storage.googleapis.com/kubernetes-release/release/${VERSION}/bin/linux/amd64/kubectl"
-    dest: /tmp/kubectl
+#- name: get kubectl
+#  get_url:
+#    url: "https://storage.googleapis.com/kubernetes-release/release/{{VERSION}}/bin/linux/amd64/kubectl"
+#    dest: /tmp/kubectl
 #    checksum: md5:9534876fae7dbe813cdab404dc1f9219
 
 - name: copy kubectl to bin dir
