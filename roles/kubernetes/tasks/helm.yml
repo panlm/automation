@@ -2,8 +2,7 @@
 # install helm
 
 - set_fact:
-    HELM_VERSION: "v2.8.2"
-    HELM_FILENAME: "helm-{{HELM_VERSION}}-linux-amd64.tar.gz"
+    HELM_FILENAME: "helm-v2.8.2-linux-amd64.tar.gz"
 
 #- name: get helm
 #  get_url:
