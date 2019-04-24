@@ -7,5 +7,5 @@
 
     - name: Hello Variable
       debug:
-        msg: "Variable1 is: {{ VAR1 }}"
+        msg: "Variable1 is: {{ vm1-ip }}, Variable2 is: {{ vm1-hostname }}, Variable3 is: {{ vm2-ip }}, Variable4 is: {{ vm2-hostname }}"
 
