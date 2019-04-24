@@ -1,0 +1,11 @@
+- name: Hello World Sample
+  hosts: all
+  tasks:
+    - name: Hello Message
+      debug:
+        msg: "Hello World!"
+
+    - name: Hello Variable
+      debug:
+        msg: "Variable1 is: {{ VAR1 }}"
+
