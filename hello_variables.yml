@@ -5,8 +5,13 @@
     - name: Hello Message
       debug:
         msg: "Hello World!"
-
     - name: Hello Variable
       debug:
         msg: "Variable1 is: {{ vm1ip }}, Variable2 is: {{ vm1hostname }}, Variable3 is: {{ vm2ip }}, Variable4 is: {{ vm2hostname }}"
+    - name: remove some packages
+      yum:
+        name:
+          - unzip
+          - git
+        state: removed
 
