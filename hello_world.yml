@@ -4,3 +4,11 @@
     - name: Hello Message
       debug:
         msg: "Hello World!"
+    - name: install some packages
+      yum:
+        name:
+          - sysstat
+          - wget
+          - unzip
+          - git
+        state: present
